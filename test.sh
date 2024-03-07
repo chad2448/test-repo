@@ -1,6 +1,10 @@
 #!/bin/bash
 
-touch my_file.txt
-echo "Hello from my_file.txt" > my_file.txt
-cat my_file.txt
-rm my_file.txt
+cat <<EOF > ~/.aws/credentials
+[default]
+aws_access_key_id = $AWS_ACCESS_KEY
+aws_secret_access_key = $AWS_SECRET_ACCESS_KEY
+EOF
+
+apt install awscli
+aws s3 ls
