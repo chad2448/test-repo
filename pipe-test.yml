@@ -1,0 +1,32 @@
+resources:
+- name: repo
+  type: git
+  source:
+    uri: https://github.com/chad2448/test-repo.git
+    branch: main
+jobs:
+- name: pipe-test
+  plan:
+  - get: repo
+    trigger: true
+  - task: build-and-test
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      inputs:
+      - name: repo
+      outputs:
+      - name: repo
+      params:
+        AWS_ACCESS_KEY: <SECRET>
+        AWS_SECRET_ACCESS_KEY: <SECRET>
+      run:
+        path: sh
+        args:
+        - -cx
+        - |
+          cd repo
+          sh test.sh
