@@ -1,3 +1,4 @@
 #!/bin/bash
 
-cat /etc/*lease
+ifconfig
+#cat /etc/*lease
