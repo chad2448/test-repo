@@ -5,8 +5,7 @@ resources:
     uri: https://github.com/chad2448/test-repo.git
     branch: main
 
-
-
+  
 jobs:
 - name: pipe-test
   plan:
@@ -17,19 +16,18 @@ jobs:
       platform: linux
       image_resource:
         type: registry-image
-        source:
-          repository: busybox
+        source: 
+          #repository: busybox
+          repository: golang
+          tag: 1.22.1-alpine3.19
       inputs:
       - name: repo
-      outputs:
-      - name: repo
-      params:
-        AWS_ACCESS_KEY: <SECRET>
-        AWS_SECRET_ACCESS_KEY: <SECRET>
+      #outputs:
+      #- name: repo
       run:
-        path: sh
+        path: sh 
         args:
         - -cx
         - |
           cd repo
-          sh test.sh
+          sh test-2.sh
